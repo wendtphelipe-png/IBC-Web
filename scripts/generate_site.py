@@ -4,7 +4,7 @@ import re
 
 DB_FILE = 'data/database.json'
 TEMPLATES_DIR = 'templates'
-DEPLOY_DIR = 'deploy'
+DEPLOY_DIR = '.'
 
 def load_db():
     with open(DB_FILE, 'r', encoding='utf-8') as f:
@@ -51,17 +51,17 @@ def generate_index_page(videos):
     cards_html = ""
     for video in videos:
         cards_html += f"""
-        <div class="glass-card" onclick="location.href='video_{video['id']}.html'" style="cursor: pointer; padding: 0; display: flex; flex-direction: column;">
-            <div style="width: 100%; height: 200px; background: url('{video['thumbnail']}') center/cover no-repeat; border-bottom: 1px solid var(--border-gold);"></div>
-            <div style="padding: 2rem;">
-                <span class="card-label">{video['duration']} • {video['publish_date']}</span>
-                <h3 class="card-title" style="font-size: 1.4rem; min-height: 4rem;">{video['title']}</h3>
-                <p style="font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.4;">{video['description'][:150]}...</p>
-                <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end; align-items: center;">
-                    <button class="cta-btn" style="padding: 0.5rem 1rem; font-size: 0.6rem; border-radius: 6px;">Watch Session</button>
+        <a href="video_{video['id']}.html" class="glass-card" style="text-decoration: none; padding: 0; display: flex; flex-direction: column; overflow: hidden;">
+            <div style="width: 100%; height: 180px; background: url('{video['thumbnail']}') center/contain no-repeat; background-color: rgba(0,0,0,0.3); border-bottom: 1px solid var(--border-gold);"></div>
+            <div style="padding: 1.5rem;">
+                <span class="card-label">{video['duration']}</span>
+                <h3 class="card-title" style="font-size: 1.1rem; line-height: 1.3; min-height: 3rem; margin-top: 0.5rem; color: #fff;">{video['title']}</h3>
+                <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{video['description'][:150]}...</p>
+                <div style="margin-top: 1rem; display: flex; justify-content: flex-end; align-items: center;">
+                    <span class="cta-btn" style="padding: 0.4rem 0.8rem; font-size: 0.6rem; border-radius: 6px; display: inline-block;">Watch Session</span>
                 </div>
             </div>
-        </div>
+        </a>
         """
     
     page_content = template.replace('{{VIDEO_CARDS}}', cards_html)
@@ -77,4 +77,4 @@ if __name__ == "__main__":
     db = load_db()
     generate_video_pages(db['videos'])
     generate_index_page(db['videos'])
-    print("[OK] Site generated successfully in /deploy")
+    print("[OK] Site generated successfully in root directory")

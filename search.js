@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Store original HTML of cards and search data
     const videoData = [];
     allCards.forEach(card => {
-        const id = card.getAttribute('onclick')?.match(/video_(\d+)/)?.[1];
+        const id = card.getAttribute('href')?.match(/video_(\d+)/)?.[1];
         console.log(`[Search] Found card with ID: ${id}`);
         if (id) {
             videoData.push({
