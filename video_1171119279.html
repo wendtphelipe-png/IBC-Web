@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Risk Reduction Strategies in Bariatric Surgery and Endoscopy | Oxford Video Library</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <style>
+        :root {
+            --oxford-blue: #001226;
+            --deep-blue: #002147;
+            --burgundy: #4A0E0E;
+            --gold: #D4AF37;
+            --cyan: #00F5FF;
+            --uv: #9400D3;
+            --glass: rgba(0, 33, 71, 0.7);
+            --border-gold: rgba(212, 175, 55, 0.3);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--oxford-blue);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 30%, var(--burgundy) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, var(--uv) 0%, transparent 40%);
+            background-blend-mode: overlay;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-gold);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            padding: 2rem 5%;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1200px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+                /* Hidden by default on mobile */
+            }
+
+            .sidebar.active {
+                display: flex;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                z-index: 1000;
+                background: var(--oxford-blue);
+                padding: 2rem;
+            }
+
+            .video-description-container {
+                max-height: 150px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .video-description-container.expanded {
+                max-height: none;
+            }
+
+            .read-more-btn {
+                display: block !important;
+            }
+        }
+
+        .read-more-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--cyan);
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            text-decoration: underline;
+        }
+
+        .player-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            background: var(--glass);
+            padding: 2.5rem;
+            border: 1px solid var(--border-gold);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius);
+        }
+
+        .video-info h1 {
+            font-family: 'EB Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .video-description {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            border-left: 2px solid var(--gold);
+            padding-left: 1.5rem;
+        }
+
+        /* Sidebar - Chapters */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .chapters-card {
+            background: var(--glass);
+            border: 1px solid var(--border-gold);
+            backdrop-filter: blur(20px);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 120px);
+            position: sticky;
+            top: 100px;
+        }
+
+        .chapters-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .chapters-header h2 {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .chapters-list {
+            list-style: none;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .chapter-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .chapter-item:hover {
+            background: rgba(0, 245, 255, 0.05);
+            border-left: 3px solid var(--cyan);
+        }
+
+        .chapter-time {
+            font-family: monospace;
+            color: var(--cyan);
+            font-size: 0.9rem;
+            min-width: 50px;
+        }
+
+        .chapter-title {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ambient-bg"></div>
+
+    <nav>
+        <a href="index.html" class="logo">IBC TV | OXFORD</a>
+        <ul style="display: flex; gap: 2rem; list-style: none; align-items: center;" class="nav-links">
+            <li><a href="index.html"
+                    style="color: var(--gold); text-decoration: none; font-size: 0.8rem; letter-spacing: 2px;">BACK TO
+                    LIBRARY</a></li>
+            <li style="color: var(--gold); font-size: 0.8rem; letter-spacing: 2px; opacity: 0.5;">VIRTUAL LIBRARY
+                DIVISION</li>
+        </ul>
+        <button class="cta-btn" style="padding: 0.7rem 1.5rem; border-radius: 8px; font-size: 0.7rem;">Become a
+            Member</button>
+    </nav>
+
+    <main>
+        <div class="player-section">
+            <div class="video-container" style="border-radius: var(--radius);">
+                <iframe id="vimeo-player"
+                    src="https://player.vimeo.com/video/1171119279?h=0&title=0&byline=0&portrait=0" frameborder="0"
+                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: -0.5rem;" class="mobile-only">
+                <button onclick="toggleChapters()" class="cta-btn"
+                    style="width: 100%; border-radius: 8px; font-size: 0.7rem; border-color: var(--cyan); color: var(--cyan);">View
+                    Session Chapters</button>
+            </div>
+
+            <div class="video-info">
+                <div class="video-meta">
+                    <span>Duration: 1:41:22</span>
+                    <span>•</span>
+                    <span>Published: 2026-03-07</span>
+                </div>
+                <h1>Cancer Risk Reduction Strategies in Bariatric Surgery and Endoscopy</h1>
+                <div class="video-description-container" id="desc-container">
+                    <p class="video-description">
+                        The 132nd IBC University of Oxford surgery webinar explores the vital link between metabolic surgery and cancer risk reduction. Broadcasting from the International Bariatric Club studios, this session focuses on strategic interventions through surgery and endoscopy. Faculty from the USA, Italy, and Malaysia share the latest oncological data within a bariatric context. The webinar addresses the mechanisms by which weight loss surgery diminishes the incidence of hormone-related cancers. Experts discuss the role of endoscopic surveillance in the pre- and post-operative patient journey. This technical deep dive is supported by the University of Oxford’s Department of Surgical Sciences. It aims to equip surgeons with the knowledge to manage long-term cancer risk in obese populations. The session highlights innovations in screening and the prevention of gastrointestinal malignancies. Participants explore the multi-disciplinary approach required for effective risk reduction. This content is a key component of the IBC's commitment to high-level continuing medical education. The discussion also previews research to be presented at the 7th IBC Oxford World Congress in 2026. Each presentation offers a balance of clinical evidence and practical surgical guidance. The IBC global community continues to lead in the integration of metabolic and oncologic science. This webinar is essential for understanding the life-extending benefits of bariatric surgery beyond weight loss. Join the experts in shaping a safer future for bariatric patients.
+                    </p>
+                </div>
+                <button onclick="toggleDescription()" id="read-more-btn" class="read-more-btn">Read More</button>
+            </div>
+        </div>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="chapters-card" style="border-radius: var(--radius);">
+                <div class="chapters-header"
+                    style="display: flex; justify-content: space-between; align-items: center;">
+                    <h2>Session Chapters</h2>
+                    <button class="mobile-only" onclick="toggleChapters()"
+                        style="background: none; border: none; color: var(--gold); font-size: 1.5rem;">&times;</button>
+                </div>
+                <ul class="chapters-list">
+                    
+            <li class="chapter-item" onclick="seekTo('00:00')">
+                <span class="chapter-time">00:00</span>
+                <span class="chapter-title">Welcome: 132nd IBC Oxford Webinar</span>
+            </li>
+            
+            <li class="chapter-item" onclick="seekTo('01:07')">
+                <span class="chapter-time">01:07</span>
+                <span class="chapter-title">Theme: Cancer Risk Reduction Strategies</span>
+            </li>
+            
+            <li class="chapter-item" onclick="seekTo('02:15')">
+                <span class="chapter-time">02:15</span>
+                <span class="chapter-title">Faculty Intro: USA, Italy and Malaysia</span>
+            </li>
+            
+            <li class="chapter-item" onclick="seekTo('15:00')">
+                <span class="chapter-time">15:00</span>
+                <span class="chapter-title">Weight Loss Surgery and Oncological Outcomes</span>
+            </li>
+            
+            <li class="chapter-item" onclick="seekTo('30:00')">
+                <span class="chapter-time">30:00</span>
+                <span class="chapter-title">Mechanisms of Cancer Prevention in Obesity</span>
+            </li>
+            
+            <li class="chapter-item" onclick="seekTo('45:00')">
+                <span class="chapter-time">45:00</span>
+                <span class="chapter-title">Role of Endoscopy in Post-Bariatric Surveillance</span>
+            </li>
+            
+            <li class="chapter-item" onclick="seekTo('60:00')">
+                <span class="chapter-time">60:00</span>
+                <span class="chapter-title">Preventing GI Malignancies: Surgical Insights</span>
+            </li>
+            
+            <li class="chapter-item" onclick="seekTo('75:00')">
+                <span class="chapter-time">75:00</span>
+                <span class="chapter-title">Multi-disciplinary Risk Management Protocols</span>
+            </li>
+            
+            <li class="chapter-item" onclick="seekTo('90:00')">
+                <span class="chapter-time">90:00</span>
+                <span class="chapter-title">Preview: IBC Oxford World Congress 2026</span>
+            </li>
+            
+            <li class="chapter-item" onclick="seekTo('100:00')">
+                <span class="chapter-time">100:00</span>
+                <span class="chapter-title">Concluding Discussion and Future Trends</span>
+            </li>
+            
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <script>
+        const player = new Vimeo.Player('vimeo-player');
+
+        function seekTo(time) {
+            const parts = time.split(':');
+            let seconds = 0;
+            if (parts.length === 2) {
+                seconds = (+parts[0]) * 60 + (+parts[1]);
+            } else if (parts.length === 3) {
+                seconds = (+parts[0]) * 3600 + (+parts[1]) * 60 + (+parts[2]);
+            }
+            player.setCurrentTime(seconds);
+            player.play();
+
+            // Mobile scroll fix
+            if (window.innerWidth <= 1200) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            function toggleChapters() {
+                document.getElementById('sidebar').classList.toggle('active');
+            }
+
+            function toggleDescription() {
+                const container = document.getElementById('desc-container');
+                const btn = document.getElementById('read-more-btn');
+                container.classList.toggle('expanded');
+                btn.textContent = container.classList.contains('expanded') ? 'Read Less' : 'Read More';
+            }
+    </script>
+    <style>
+        .mobile-only {
+            display: none;
+        }
+
+        @media (max-width: 1200px) {
+            .mobile-only {
+                display: block;
+            }
+        }
+    </style>
+</body>
+
+</html>

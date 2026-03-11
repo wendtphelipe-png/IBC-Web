@@ -1,0 +1,41 @@
+# Binaries
+bin/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project Specific
+deploy/
+token.json
+vimeo_token.txt
+credentials.json
+cookies.txt
+
+# Media (already in assets/ but excluding duplicates or large files if needed)
+# assets/hero_bg.mp4  # Keep if needed in repo, but it's 65MB

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxford Cyber-Medical Institution</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --oxford-blue: #001226;
+            --deep-blue: #002147;
+            --burgundy: #4A0E0E;
+            --gold: #D4AF37;
+            --cyan: #00F5FF;
+            --uv: #9400D3;
+            --glass: rgba(0, 33, 71, 0.7);
+            --border-gold: rgba(212, 175, 55, 0.3);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--oxford-blue);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Gothic Cyber-Lattice Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -5;
+            /* Back of all */
+            background:
+                radial-gradient(circle at 20% 30%, var(--burgundy) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, var(--uv) 0%, transparent 40%);
+            background-blend-mode: overlay;
+        }
+
+        .ambient-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 L100 50 L50 100 L0 50 Z' fill='none' stroke='rgba(212,175,55,0.05)' stroke-width='0.5'/%3E%3C/svg%3E");
+            mask-image: linear-gradient(to bottom, transparent, black, transparent);
+        }
+
+        /* Header Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 5%;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-gold);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'EB Garamond', serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+            text-shadow: 0 0 10px var(--cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            z-index: 1;
+            /* Stay above ambient-bg */
+        }
+
+        .hero-content h1 {
+            font-family: 'EB Garamond', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #fff, var(--gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            /* Standard property */
+            -webkit-text-fill-color: transparent;
+            font-weight: 400;
+        }
+
+        .hero-content p {
+            max-width: 500px;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 3rem;
+            border-left: 2px solid var(--gold);
+            padding-left: 2rem;
+        }
+
+        /* 3D Neural Widget */
+        .neural-node {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            perspective: 1000px;
+        }
+
+        .node-core {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+            border-radius: 50%;
+            position: absolute;
+            animation: pulse 4s infinite ease-in-out;
+            opacity: 0.4;
+            filter: blur(20px);
+        }
+
+        .lattice-sphere {
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            transform-style: preserve-3d;
+            animation: rotate 20s linear infinite;
+        }
+
+        .lattice-sphere::after {
+            content: '';
+            position: absolute;
+            inset: -20px;
+            border: 1px solid var(--uv);
+            border-radius: 50%;
+            transform: rotateX(90deg);
+        }
+
+        /* Interactive Data Cards */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 5rem 10%;
+            margin-top: -100px;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid var(--border-gold);
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            border-radius: var(--radius);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--cyan));
+            transform: scaleX(0);
+            transition: var(--transition);
+            transform-origin: left;
+        }
+
+        .glass-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-label {
+            font-size: 0.7rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Visualization Widget */
+        .viz-container {
+            height: 100px;
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            margin-top: 2rem;
+        }
+
+        .bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--uv), var(--cyan));
+            border-radius: 2px 2px 0 0;
+            height: 10%;
+            transition: height 1s ease;
+        }
+
+        /* Buttons */
+        .cta-btn {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 1.2rem 2.5rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            background: var(--gold);
+            color: var(--oxford-blue);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Animations */
+        @keyframes rotate {
+            from {
+                transform: rotateY(0) rotateX(0);
+            }
+
+            to {
+                transform: rotateY(360deg) rotateX(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.6;
+            }
+        }
+
+        .float {
+            animation: floating 6s infinite ease-in-out;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Scroll Progress */
+        #scroll-path {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #scroll-thumb {
+            width: 100%;
+            height: 30%;
+            background: var(--gold);
+            box-shadow: 0 0 10px var(--gold);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ambient-bg"></div>
+
+    <nav>
+        <div class="logo">IBC TV | OXFORD</div>
+        <ul class="nav-links">
+            <li><a href="#">Upcoming Webnars</a></li>
+            <li><a href="#">7th IBC Oxford World Congress 2026</a></li>
+            <li><a href="#">IBC News</a></li>
+        </ul>
+        <button class="cta-btn" style="padding: 0.8rem 1.5rem; border-radius: 8px;">Become a Member</button>
+    </nav>
+
+    <div id="scroll-path">
+        <div id="scroll-thumb"></div>
+    </div>
+
+    <main>
+        <section class="hero"
+            style="overflow: hidden; border-radius: 0 0 40px 40px; margin-bottom: 2rem; position: relative;">
+            <video autoplay muted loop playsinline
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
+                <source src="assets/hero_bg.mp4" type="video/mp4">
+            </video>
+            <!-- Overlay Mask -->
+            <div
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--glass); opacity: 0.4; z-index: 2; backdrop-filter: blur(4px);">
+            </div>
+
+            <div class="hero-content" style="position: relative; z-index: 10;">
+                <span class="card-label" style="margin-left: 2rem;">IBC | UNIVERSITY OF OXFORD</span>
+                <h1>IBC TV<br>Video Library</h1>
+                <p>Legacy in Tradition, Pioneers in Innovation: Connecting the Minds Shaping Global Medicine.</p>
+                <div style="display: flex; gap: 2rem; padding-left: 2rem;">
+                    <button class="cta-btn" style="border-radius: 8px;">Upcoming Webnars</button>
+                </div>
+            </div>
+
+            <div class="neural-node float" style="position: relative; z-index: 10;">
+                <div class="node-core"></div>
+                <div class="lattice-sphere"></div>
+                <div class="lattice-sphere" style="transform: rotateY(45deg);"></div>
+                <div class="lattice-sphere" style="transform: rotateX(45deg);"></div>
+            </div>
+        </section>
+
+        <!-- Advanced Search Engine Section -->
+        <section style="padding: 0 10% 4rem; position: relative; z-index: 10;">
+            <div class="glass-card"
+                style="padding: 1.5rem; border-radius: var(--radius); display: flex; gap: 1rem; align-items: center; border-color: var(--cyan); background: rgba(0,0,0,0.4);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.7;">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="transcript-search"
+                    placeholder="Search by topic, procedure, or mention in transcripts..."
+                    style="background: transparent; border: none; outline: none; color: white; width: 100%; font-size: 1.1rem; font-family: 'Inter', sans-serif;">
+            </div>
+            <div id="search-results-meta"
+                style="margin-top: 1rem; color: var(--gold); font-size: 0.8rem; letter-spacing: 1px; display: none;">
+                SEARCHING ACROSS 5 SESSIONS AND 12,000+ TRANSCRIPT LINES...
+            </div>
+        </section>
+
+        <section class="data-grid" id="video-library">
+            <div style="grid-column: 1 / -1; margin-bottom: 2rem;">
+                <span class="card-label">Curated Content</span>
+                <h2 class="card-title" style="font-size: 3rem;">Educational Library</h2>
+            </div>
+
+            {{VIDEO_CARDS}}
+        </section>
+    </main>
+
+    <script>
+        // Animation Loop for any bars that might be added later
+        setInterval(() => {
+            const bars = document.querySelectorAll('.bar');
+            bars.forEach(bar => {
+                bar.style.height = Math.random() * 100 + '%';
+            });
+        }, 2000);
+
+        // Scroll Parallax Effect for the Neural Node
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const node = document.querySelector('.neural-node');
+            if (node) {
+                node.style.transform = `translateY(${scrolled * 0.2}px) rotate(${scrolled * 0.05}deg)`;
+            }
+
+            const thumb = document.getElementById('scroll-thumb');
+            if (thumb) {
+                const totalHeight = document.body.scrollHeight - window.innerHeight;
+                const progress = (scrolled / totalHeight) * 100;
+                thumb.style.height = progress + '%';
+            }
+        });
+
+        // Mouse move light effect
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(0, 245, 255, 0.05) 0%, var(--glass) 50%)`;
+            });
+        });
+    </script>
+</body>
+
+</html>
