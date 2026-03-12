@@ -31,7 +31,6 @@ coverage.xml
 *.swo
 
 # Project Specific
-deploy/
 token.json
 vimeo_token.txt
 credentials.json

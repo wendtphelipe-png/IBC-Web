@@ -1,11 +1,10 @@
 import json
 import os
 import re
-import shutil
 
 DB_FILE = 'data/database.json'
 TEMPLATES_DIR = 'templates'
-DEPLOY_DIR = 'deploy'
+DEPLOY_DIR = '.'
 
 def load_db():
     with open(DB_FILE, 'r', encoding='utf-8') as f:
@@ -75,12 +74,7 @@ if __name__ == "__main__":
     if not os.path.exists(DEPLOY_DIR):
         os.makedirs(DEPLOY_DIR)
         
-    # Ensure search.js is in deploy folder
-    if os.path.exists('search.js'):
-        shutil.copy('search.js', DEPLOY_DIR)
-        print("[*] search.js copied to deploy folder")
-        
     db = load_db()
     generate_video_pages(db['videos'])
     generate_index_page(db['videos'])
-    print(f"[OK] Site generated successfully in '{DEPLOY_DIR}' directory")
+    print("[OK] Site generated successfully in root directory")
