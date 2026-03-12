@@ -2,8 +2,5 @@
   "name": "ibc-library",
   "version": "1.0.0",
   "private": true,
-  "description": "IBC TV Video Library Static Site",
-  "scripts": {
-    "build": "echo 'Static Site - No Build Needed'"
-  }
+  "description": "IBC TV Video Library Static Site"
 }
