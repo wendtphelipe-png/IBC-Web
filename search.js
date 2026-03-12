@@ -23,18 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     console.log(`[Search] Total video cards tracked: ${videoData.length}`);
 
-    // Robust redirection handling
-    videoLibrary.addEventListener('click', (e) => {
-        const card = e.target.closest('.glass-card');
-        if (card) {
-            const href = card.getAttribute('href');
-            if (href) {
-                console.log(`[Redirection] Navigating to: ${href}`);
-                window.location.href = href;
-            }
-        }
-    });
-
     searchInput.addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase().trim();
 

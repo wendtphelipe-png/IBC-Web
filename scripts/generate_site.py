@@ -50,8 +50,10 @@ def generate_index_page(videos):
 
     cards_html = ""
     for video in videos:
+        # Using clean URLs (no .html extension) for Vercel
+        clean_url = f"video_{video['id']}"
         cards_html += f"""
-        <a href="video_{video['id']}.html" class="glass-card video-card-link" data-id="{video['id']}" style="text-decoration: none; padding: 0; display: flex; flex-direction: column; overflow: hidden; position: relative; z-index: 5;">
+        <a href="{clean_url}" class="glass-card video-card-link" data-id="{video['id']}" style="text-decoration: none; padding: 0; display: flex; flex-direction: column; overflow: hidden; position: relative; z-index: 5;">
             <div style="width: 100%; height: 180px; background: url('{video['thumbnail']}') center/contain no-repeat; background-color: rgba(0,0,0,0.3); border-bottom: 1px solid var(--border-gold); pointer-events: none;"></div>
             <div style="padding: 1.5rem; pointer-events: none;">
                 <span class="card-label">{video['duration']}</span>
