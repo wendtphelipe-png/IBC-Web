@@ -51,9 +51,9 @@ def generate_index_page(videos):
     cards_html = ""
     for video in videos:
         cards_html += f"""
-        <a href="video_{video['id']}.html" class="glass-card" style="text-decoration: none; padding: 0; display: flex; flex-direction: column; overflow: hidden;">
-            <div style="width: 100%; height: 180px; background: url('{video['thumbnail']}') center/contain no-repeat; background-color: rgba(0,0,0,0.3); border-bottom: 1px solid var(--border-gold);"></div>
-            <div style="padding: 1.5rem;">
+        <a href="video_{video['id']}.html" class="glass-card video-card-link" data-id="{video['id']}" style="text-decoration: none; padding: 0; display: flex; flex-direction: column; overflow: hidden; position: relative; z-index: 5;">
+            <div style="width: 100%; height: 180px; background: url('{video['thumbnail']}') center/contain no-repeat; background-color: rgba(0,0,0,0.3); border-bottom: 1px solid var(--border-gold); pointer-events: none;"></div>
+            <div style="padding: 1.5rem; pointer-events: none;">
                 <span class="card-label">{video['duration']}</span>
                 <h3 class="card-title" style="font-size: 1.1rem; line-height: 1.3; min-height: 3rem; margin-top: 0.5rem; color: #fff;">{video['title']}</h3>
                 <p style="font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{video['description'][:150]}...</p>
